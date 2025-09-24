@@ -8,5 +8,5 @@
    b. Upload a recipe to order ingredients.
    c. Delivery for ingredients.
 
-#Our Product Vision Statement<br/>
-   ##The focus that our product will aim towards will be that it serves as a food delivery app, where a customer can easily obtain ingredients of a planned recipe.
+# Our Product Vision Statement<br/>
+   ## The focus that our product will aim towards will be that it serves as a food delivery app, where a customer can easily obtain ingredients of a planned recipe.
