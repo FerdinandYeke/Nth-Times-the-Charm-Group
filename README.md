@@ -9,4 +9,4 @@
    c. Delivery for ingredients.
 
 # Our Product Vision Statement<br/>
-   ### The focus that our product will aim towards will be that it serves as a food delivery app, where a customer can easily obtain ingredients of a planned recipe.
+   ### The focus that our product will aim towards will be that it serves as a food delivery app, where a customer can easily obtain ingredients of a planned recipe. This product can serve for many, such as one that attempts to juggle many things in their daily routine while finding time to cook, planning and cooking meals in time, and much more. This app will have many features to support this mission like selecting ingredients for recipe, uploading a recipe, delivery for ingredients and more. We hope you look forward into this product!
