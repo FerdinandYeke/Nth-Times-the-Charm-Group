@@ -3,10 +3,10 @@
 2. Possible names that the app can have is Dinnerly or Recipete or Recipeat.
 3. The name that we have decided to choose is Recipeté
 4. This can be for normal people, people who have trouble planning & cooking meals in time or not having as much time to buy ingredients to then using them for cooking.
-5. Potential features for the app
-   a. Select ingredients to generate a recipe.
-   b. Upload a recipe to order ingredients.
-   c. Delivery for ingredients.
+5. Potential features for the app<br/>
+   a. Select ingredients to generate a recipe.<br/>
+   b. Upload a recipe to order ingredients.<br/>
+   c. Delivery for ingredients.<br/>
 
 # Our Product Vision Statement<br/>
    ### The focus that our product will aim towards will be that it serves as a food delivery app, where a customer can easily obtain ingredients of a planned recipe. This product can serve for many, such as one that attempts to juggle many things in their daily routine while finding time to cook, planning and cooking meals in time, and much more. This app will have many features to support this mission like selecting ingredients for recipe, uploading a recipe, delivery for ingredients and more. We hope you look forward into this product!
