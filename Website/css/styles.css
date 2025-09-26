@@ -1,0 +1,193 @@
+/* Global Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Color Palette */
+:root {
+  --lime: #A8F045;
+  --pink: #FA9A9E;
+  --navy: #162131;
+  --cream: #FFF2E0;
+  --lavender: #F2E6F1;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  background: var(--cream);
+  color: var(--navy);
+}
+
+.container {
+  width: 90%;
+  max-width: 1100px;
+  margin: auto;
+}
+
+/* Header */
+header {
+  background: var(--navy);
+  color: #fff;
+  padding: 15px 0;
+}
+
+header .logo {
+  float: left;
+  font-size: 1.5rem;
+}
+
+header nav {
+  float: right;
+}
+
+header nav ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+header nav ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+header::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Hero */
+/* Hero */
+#hero {
+  position: relative;
+  background: url("../img/hero.jpg") no-repeat center center/cover;
+  color: #fff;
+  text-align: center;
+  padding: 120px 20px;
+}
+
+/* Overlay */
+#hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(22, 33, 49, 0.6); /* navy color with 60% opacity */
+  z-index: 1;
+}
+
+/* Ensure text stays above overlay */
+#hero .hero-text {
+  position: relative;
+  z-index: 2;
+}
+
+/* #hero {
+  background: url("../img/hero.jpg") no-repeat center center/cover;
+  color: #fff;
+  text-align: center;
+  padding: 120px 20px;
+} */
+
+/* #hero {
+  background: url("https://picsum.photos/1600/800?food") no-repeat center center/cover;
+} */
+
+#hero h2 {
+  font-size: 2.8rem;
+  margin-bottom: 15px;
+}
+
+#hero p {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+.btn {
+  background: var(--lime);
+  color: var(--navy);
+  padding: 12px 25px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.btn:hover {
+  background: var(--pink);
+  color: #fff;
+}
+
+/* Sections */
+section {
+  padding: 60px 20px;
+}
+
+section h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 2rem;
+}
+
+/* Features */
+.features-grid {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.feature-card {
+  background: var(--lavender);
+  padding: 20px;
+  border-radius: 8px;
+  width: 300px;
+  text-align: center;
+}
+
+/* Team */
+.team-grid {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.team-member {
+  text-align: center;
+  width: 200px;
+}
+
+.team-member img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+/* Video */
+.video-wrapper {
+  text-align: center;
+}
+
+iframe {
+  max-width: 100%;
+  border-radius: 8px;
+}
+
+/* Footer */
+footer {
+  background: var(--navy);
+  color: #fff;
+  text-align: center;
+  padding: 20px;
+  margin-top: 40px;
+}
