@@ -62,7 +62,6 @@ header::after {
 }
 
 /* Hero */
-/* Hero */
 #hero {
   position: relative;
   background: url("../img/hero.jpg") no-repeat center center/cover;
@@ -79,7 +78,7 @@ header::after {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(22, 33, 49, 0.6); /* navy color with 60% opacity */
+  background: rgba(22, 33, 49, 0.6);
   z-index: 1;
 }
 
@@ -88,17 +87,6 @@ header::after {
   position: relative;
   z-index: 2;
 }
-
-/* #hero {
-  background: url("../img/hero.jpg") no-repeat center center/cover;
-  color: #fff;
-  text-align: center;
-  padding: 120px 20px;
-} */
-
-/* #hero {
-  background: url("https://picsum.photos/1600/800?food") no-repeat center center/cover;
-} */
 
 #hero h2 {
   font-size: 2.8rem;
@@ -123,6 +111,181 @@ header::after {
 .btn:hover {
   background: var(--pink);
   color: #fff;
+}
+
+/* Design Artifact Hero */
+#design_artifact_hero {
+  position: relative;
+  background: url("../img/design_artifacts.jpeg") no-repeat center center/cover;
+  color: #fff;
+  text-align: center;
+  padding: 120px 20px;
+}
+
+#design_artifact_hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(22, 33, 49, 0.6);
+  z-index: 1;
+}
+
+#design_artifact_hero .hero-text {
+  position: relative;
+  z-index: 2;
+}
+
+#design_artifact_hero h2 {
+  font-size: 2.8rem;
+  margin-bottom: 15px;
+}
+
+#design_artifact_hero p {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+/* Interview Hero */
+#interview_hero {
+  position: relative;
+  background: url("../img/interview_hero.jpg") no-repeat center center/cover;
+  color: #fff;
+  text-align: center;
+  padding: 120px 20px;
+}
+
+#interview_hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(22, 33, 49, 0.6);
+  z-index: 1;
+}
+
+#interview_hero .hero-text {
+  position: relative;
+  z-index: 2;
+}
+
+#interview_hero h2 {
+  font-size: 2.8rem;
+  margin-bottom: 15px;
+}
+
+#interview_hero p {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+/* Persona Hero */
+#persona_hero {
+  position: relative;
+  background: url("../img/persona_hero.jpg") no-repeat center center/cover;
+  color: #fff;
+  text-align: center;
+  padding: 120px 20px;
+}
+
+#persona_hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(22, 33, 49, 0.6);
+  z-index: 1;
+}
+
+#persona_hero .hero-text {
+  position: relative;
+  z-index: 2;
+}
+
+#persona_hero h2 {
+  font-size: 2.8rem;
+  margin-bottom: 15px;
+}
+
+#persona_hero p {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+/* Scenario Hero */
+#scenario_hero {
+  position: relative;
+  background: url("../img/scenarios_hero.jpg") no-repeat center center/cover;
+  color: #fff;
+  text-align: center;
+  padding: 120px 20px;
+}
+
+#scenario_hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(22, 33, 49, 0.6);
+  z-index: 1;
+}
+
+#scenario_hero .hero-text {
+  position: relative;
+  z-index: 2;
+}
+
+#scenario_hero h2 {
+  font-size: 2.8rem;
+  margin-bottom: 15px;
+}
+
+#scenario_hero p {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+/* User Story Hero */
+#user_story_hero {
+  position: relative;
+  background: url("../img/user_story_hero.jpg") no-repeat center center/cover;
+  color: #fff;
+  text-align: center;
+  padding: 120px 20px;
+}
+
+#user_story_hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(22, 33, 49, 0.6);
+  z-index: 1;
+}
+
+#user_story_hero .hero-text {
+  position: relative;
+  z-index: 2;
+}
+
+#user_story_hero h2 {
+  font-size: 2.8rem;
+  margin-bottom: 15px;
+}
+
+#user_story_hero p {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
 }
 
 /* Sections */
@@ -181,6 +344,170 @@ section h2 {
 iframe {
   max-width: 100%;
   border-radius: 8px;
+}
+
+/* Interview sections */
+section[id^="interview"] {
+  padding: 3rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+section[id^="interview"] h2 {
+  font-size: 1.8rem;
+  color: #2E5339;
+  margin-bottom: 0.5rem;
+}
+
+section[id^="interview"] h3 {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #555;
+  background-color: #f9f9f9;
+  border-left: 4px solid #6cbf84;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
+  letter-spacing: 0.2px;
+  font-style: italic;
+}
+
+section[id^="interview"] h4 {
+  margin-top: 1.25rem;
+  color: #2E5339;
+  font-size: 1.05rem;
+}
+
+section[id^="interview"] p {
+  margin: 0.5rem 0 1rem 0;
+  line-height: 1.6;
+  color: #333;
+  max-width: 800px;
+}
+
+#interview_hero,
+#interview_hero h2 {
+  color: #ffffff !important;
+}
+
+/* Persona sections */
+section[id^="persona"] {
+  padding: 3rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+section[id^="persona"] h2 {
+  font-size: 1.8rem;
+  color: #2E5339;
+  margin-bottom: 0.5rem;
+}
+
+section[id^="persona"] h3 {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #555;
+  background-color: #f9f9f9;
+  border-left: 4px solid #6cbf84;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
+  letter-spacing: 0.2px;
+  font-style: italic;
+}
+
+section[id^="persona"] h4 {
+  margin-top: 1.25rem;
+  color: #2E5339;
+  font-size: 1.05rem;
+}
+
+section[id^="persona"] p {
+  margin: 0.5rem 0 1rem 0;
+  line-height: 1.6;
+  color: #333;
+  max-width: 800px;
+}
+
+#persona_hero,
+#persona_hero h2 {
+  color: #ffffff !important;
+}
+
+/* Scenario sections */
+section[id^="scenario"] {
+  padding: 3rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+section[id^="scenario"] h2 {
+  font-size: 1.8rem;
+  color: #2E5339;
+  margin-bottom: 0.5rem;
+}
+
+section[id^="scenario"] h3 {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #555;
+  background-color: #f9f9f9;
+  border-left: 4px solid #6cbf84;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
+  letter-spacing: 0.2px;
+  font-style: italic;
+}
+
+section[id^="scenario"] p {
+  margin: 0.5rem 0 1rem 0;
+  line-height: 1.6;
+  color: #333;
+  max-width: 800px;
+}
+
+#scenario_hero,
+#scenario_hero h2 {
+  color: #ffffff !important;
+}
+
+/* User Story sections */
+section[id^="user_story"] {
+  padding: 3rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+section[id^="user_story"] h2 {
+  font-size: 1.8rem;
+  color: #2E5339;
+  margin-bottom: 0.5rem;
+}
+
+section[id^="user_story"] h3 {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #555;
+  background-color: #f9f9f9;
+  border-left: 4px solid #6cbf84;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
+  letter-spacing: 0.2px;
+  font-style: italic;
+}
+
+section[id^="user_story"] p {
+  margin: 0.5rem 0 1rem 0;
+  line-height: 1.6;
+  color: #333;
+  max-width: 800px;
+}
+
+#user_story_hero,
+#user_story_hero h2 {
+  color: #ffffff !important;
 }
 
 /* Footer */
