@@ -1,0 +1,19 @@
+version: "3.9"
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: recipete-db
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpw
+      MYSQL_DATABASE: recipete_db
+      MYSQL_USER: recipete
+      MYSQL_PASSWORD: recipete_pw
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:
