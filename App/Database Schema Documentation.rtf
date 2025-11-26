@@ -1,0 +1,1786 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2822
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 Times-Bold;\f1\fnil\fcharset0 HelveticaNeue;\f2\froman\fcharset0 Times-Roman;
+\f3\fnil\fcharset0 HelveticaNeue-Bold;\f4\fnil\fcharset0 LucidaGrande;\f5\fswiss\fcharset0 Helvetica;
+\f6\froman\fcharset0 TimesNewRomanPSMT;\f7\fmodern\fcharset0 Courier;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red242\green242\blue242;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\cssrgb\c96078\c96078\c96078;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}
+{\list\listtemplateid2\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid101\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid2}
+{\list\listtemplateid3\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid201\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid3}
+{\list\listtemplateid4\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid301\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid4}
+{\list\listtemplateid5\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid401\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid5}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}{\listoverride\listid2\listoverridecount0\ls2}{\listoverride\listid3\listoverridecount0\ls3}{\listoverride\listid4\listoverridecount0\ls4}{\listoverride\listid5\listoverridecount0\ls5}}
+\margl1440\margr1440
+\deftab720
+\pard\pardeftab720\sa321\partightenfactor0
+
+\f0\b\fs48 \cf2 \up0 \nosupersub \ulnone Recipet\'e9 Database Schema Documentation\
+\pard\pardeftab720\partightenfactor0
+
+\f1\b0\fs40 \cf2 1. Overview\
+\pard\pardeftab720\partightenfactor0
+
+\fs22 \cf2 The Recipet\'e9 database supports:\
+\pard\tx220\tx678\pardeftab720\li678\fi-679\partightenfactor0
+\ls1\ilvl0
+\f2 \cf2 \up0 \nosupersub \ulnone {\listtext	\uc0\u8226 	}
+\f1 \up0 \nosupersub \ulnone User accounts & preferences\
+\ls1\ilvl0
+\f2 \up0 \nosupersub \ulnone {\listtext	\uc0\u8226 	}
+\f1 \up0 \nosupersub \ulnone Recipes (including imported recipes from TheMealDB)\
+\ls1\ilvl0
+\f2 \up0 \nosupersub \ulnone {\listtext	\uc0\u8226 	}
+\f1 \up0 \nosupersub \ulnone Ingredients & recipe ingredients\
+\ls1\ilvl0
+\f2 \up0 \nosupersub \ulnone {\listtext	\uc0\u8226 	}
+\f1 \up0 \nosupersub \ulnone Tags and recipe categorization\
+\ls1\ilvl0
+\f2 \up0 \nosupersub \ulnone {\listtext	\uc0\u8226 	}
+\f1 \up0 \nosupersub \ulnone Meal plans & scheduled meals\
+\ls1\ilvl0
+\f2 \up0 \nosupersub \ulnone {\listtext	\uc0\u8226 	}
+\f1 \up0 \nosupersub \ulnone Grocery lists & items\
+\ls1\ilvl0
+\f2 \up0 \nosupersub \ulnone {\listtext	\uc0\u8226 	}
+\f1 \up0 \nosupersub \ulnone Optional caching of external recipe data\
+\pard\pardeftab720\partightenfactor0
+\cf2 The schema is normalized and relational, designed for scalability, extensibility, and integration with external services.\
+\pard\pardeftab720\sa240\partightenfactor0
+
+\f2\fs24 \cf2 \
+\pard\pardeftab720\partightenfactor0
+
+\f1\fs40 \cf2 2. Entity\'96Relationship Model (Conceptual Overview)\
+\pard\pardeftab720\partightenfactor0
+
+\f3\b\fs36 \cf2 Core Entities\
+\pard\tx220\tx678\pardeftab720\li678\fi-679\partightenfactor0
+\ls2\ilvl0
+\f0\fs22 \cf2 \up0 \nosupersub \ulnone {\listtext	\uc0\u8226 	}
+\f1\b0 \up0 \nosupersub \ulnone Users\
+\ls2\ilvl0
+\f0\b \up0 \nosupersub \ulnone {\listtext	\uc0\u8226 	}
+\f1\b0 \up0 \nosupersub \ulnone User Preferences (1\'961 with Users)\
+\ls2\ilvl0
+\f0\b \up0 \nosupersub \ulnone {\listtext	\uc0\u8226 	}
+\f1\b0 \up0 \nosupersub \ulnone Recipes\
+\ls2\ilvl0
+\f0\b \up0 \nosupersub \ulnone {\listtext	\uc0\u8226 	}
+\f1\b0 \up0 \nosupersub \ulnone Ingredients\
+\ls2\ilvl0
+\f0\b \up0 \nosupersub \ulnone {\listtext	\uc0\u8226 	}
+\f1\b0 \up0 \nosupersub \ulnone Recipe Ingredients (junction)\
+\ls2\ilvl0
+\f0\b \up0 \nosupersub \ulnone {\listtext	\uc0\u8226 	}
+\f1\b0 \up0 \nosupersub \ulnone Recipe Steps\
+\ls2\ilvl0
+\f0\b \up0 \nosupersub \ulnone {\listtext	\uc0\u8226 	}
+\f3 \up0 \nosupersub \ulnone Tags
+\f1\b0  and 
+\f3\b Recipe Tags
+\f1\b0  (junction)\
+\ls2\ilvl0
+\f0\b \up0 \nosupersub \ulnone {\listtext	\uc0\u8226 	}
+\f1\b0 \up0 \nosupersub \ulnone Meal Plans\
+\ls2\ilvl0
+\f0\b \up0 \nosupersub \ulnone {\listtext	\uc0\u8226 	}
+\f3 \up0 \nosupersub \ulnone Meal Plan Items
+\f1\b0  (scheduled meals)\
+\ls2\ilvl0
+\f0\b \up0 \nosupersub \ulnone {\listtext	\uc0\u8226 	}
+\f1\b0 \up0 \nosupersub \ulnone Grocery Lists\
+\ls2\ilvl0
+\f0\b \up0 \nosupersub \ulnone {\listtext	\uc0\u8226 	}
+\f1\b0 \up0 \nosupersub \ulnone Grocery List Items\
+\ls2\ilvl0
+\f0\b \up0 \nosupersub \ulnone {\listtext	\uc0\u8226 	}
+\f1\b0 \up0 \nosupersub \ulnone External Recipe Cache (raw JSON for imports)\
+\pard\pardeftab720\partightenfactor0
+\cf2 \
+\pard\pardeftab720\partightenfactor0
+
+\f3\b\fs36 \cf2 Relationships\
+\pard\tx220\tx678\pardeftab720\li678\fi-679\partightenfactor0
+\ls3\ilvl0
+\f2\b0\fs22 \cf2 \up0 \nosupersub \ulnone {\listtext	\uc0\u8226 	}
+\f1 \up0 \nosupersub \ulnone A User 
+\f4 \uc0\u8594 
+\f1  can have 
+\f4 \uc0\u8594 
+\f1  many Recipes\
+\ls3\ilvl0
+\f2 \up0 \nosupersub \ulnone {\listtext	\uc0\u8226 	}
+\f1 \up0 \nosupersub \ulnone A Recipe 
+\f4 \uc0\u8594 
+\f1  has 
+\f4 \uc0\u8594 
+\f1  many Ingredients\
+\ls3\ilvl0
+\f2 \up0 \nosupersub \ulnone {\listtext	\uc0\u8226 	}
+\f1 \up0 \nosupersub \ulnone A Recipe 
+\f4 \uc0\u8594 
+\f1  has 
+\f4 \uc0\u8594 
+\f1  many Steps\
+\ls3\ilvl0
+\f2 \up0 \nosupersub \ulnone {\listtext	\uc0\u8226 	}
+\f1 \up0 \nosupersub \ulnone A Recipe 
+\f4 \uc0\u8594 
+\f1  has 
+\f4 \uc0\u8594 
+\f1  many Tags\
+\ls3\ilvl0
+\f2 \up0 \nosupersub \ulnone {\listtext	\uc0\u8226 	}
+\f1 \up0 \nosupersub \ulnone A User 
+\f4 \uc0\u8594 
+\f1  has 
+\f4 \uc0\u8594 
+\f1  one Preferences set\
+\ls3\ilvl0
+\f2 \up0 \nosupersub \ulnone {\listtext	\uc0\u8226 	}
+\f1 \up0 \nosupersub \ulnone A User 
+\f4 \uc0\u8594 
+\f1  can have 
+\f4 \uc0\u8594 
+\f1  many Meal Plans\
+\ls3\ilvl0
+\f2 \up0 \nosupersub \ulnone {\listtext	\uc0\u8226 	}
+\f1 \up0 \nosupersub \ulnone A Meal Plan 
+\f4 \uc0\u8594 
+\f1  has 
+\f4 \uc0\u8594 
+\f1  many Meal Plan Items\
+\ls3\ilvl0
+\f2 \up0 \nosupersub \ulnone {\listtext	\uc0\u8226 	}
+\f1 \up0 \nosupersub \ulnone A Meal Plan 
+\f4 \uc0\u8594 
+\f1  optionally generates 
+\f4 \uc0\u8594 
+\f1  Grocery Lists\
+\ls3\ilvl0
+\f2 \up0 \nosupersub \ulnone {\listtext	\uc0\u8226 	}
+\f1 \up0 \nosupersub \ulnone A Grocery List 
+\f4 \uc0\u8594 
+\f1  contains 
+\f4 \uc0\u8594 
+\f1  many Grocery List Items\
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sa240\partightenfactor0
+
+\f2\fs24 \cf2 \
+\pard\pardeftab720\partightenfactor0
+
+\f1\fs40 \cf2 3. Detailed Table Documentation\
+\pard\pardeftab720\partightenfactor0
+
+\fs22 \cf2 \
+\pard\pardeftab720\partightenfactor0
+
+\f3\b\fs36 \cf2 3.1 USERS\
+\pard\pardeftab720\sa240\partightenfactor0
+
+\f2\b0\fs24 \cf2 Stores all registered users.\
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrt\brdrnil \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth1500\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx2880
+\clvertalc \clshdrawnil \clwWidth2680\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx5760
+\clvertalc \clshdrawnil \clwWidth3180\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\qc\partightenfactor0
+
+\f0\b \cf2 Field
+\f5\b0 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\qc\partightenfactor0
+
+\f0\b \cf2 \up0 \nosupersub \ulnone Type
+\f5\b0 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\qc\partightenfactor0
+
+\f0\b \cf2 \up0 \nosupersub \ulnone Description
+\f5\b0 \cf0 \up0 \nosupersub \ulnone \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clcbpat3 \clwWidth1500\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx2880
+\clvertalc \clcbpat3 \clwWidth2680\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx5760
+\clvertalc \clcbpat3 \clwWidth3180\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone user_id
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone INT PK
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone Unique identifier
+\f5 \cf0 \up0 \nosupersub \ulnone \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth1500\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx2880
+\clvertalc \clshdrawnil \clwWidth2680\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx5760
+\clvertalc \clshdrawnil \clwWidth3180\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone email
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone VARCHAR(255) UNIQUE
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone User email
+\f5 \cf0 \up0 \nosupersub \ulnone \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clcbpat3 \clwWidth1500\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx2880
+\clvertalc \clcbpat3 \clwWidth2680\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx5760
+\clvertalc \clcbpat3 \clwWidth3180\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone password_hash
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone VARCHAR(255)
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone Hashed password
+\f5 \cf0 \up0 \nosupersub \ulnone \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth1500\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx2880
+\clvertalc \clshdrawnil \clwWidth2680\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx5760
+\clvertalc \clshdrawnil \clwWidth3180\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone full_name
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone VARCHAR(255)
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone Optional name
+\f5 \cf0 \up0 \nosupersub \ulnone \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clcbpat3 \clwWidth1500\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx2880
+\clvertalc \clcbpat3 \clwWidth2680\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx5760
+\clvertalc \clcbpat3 \clwWidth3180\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone created_at
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone DATETIME
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone Record creation time
+\f5 \cf0 \up0 \nosupersub \ulnone \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrt\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth1500\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx2880
+\clvertalc \clshdrawnil \clwWidth2680\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx5760
+\clvertalc \clshdrawnil \clwWidth3180\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone updated_at
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone DATETIME
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone Updated time
+\f5 \cf0 \up0 \nosupersub \ulnone 
+\f2 \cf2 \up0 \nosupersub \ulnone \cell \lastrow\row
+\pard\pardeftab720\partightenfactor0
+\cf2 \
+\
+\pard\pardeftab720\partightenfactor0
+
+\f3\b\fs36 \cf2 3.2 USER_PREFERENCES\
+\pard\pardeftab720\sa240\partightenfactor0
+
+\f2\b0\fs24 \cf2 One row per user; stores settings used by the meal planner.\
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrt\brdrnil \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth2480\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx2880
+\clvertalc \clshdrawnil \clwWidth2020\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx5760
+\clvertalc \clshdrawnil \clwWidth3380\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\qc\partightenfactor0
+
+\f0\b \cf2 Field
+\f5\b0 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\qc\partightenfactor0
+
+\f0\b \cf2 \up0 \nosupersub \ulnone Type
+\f5\b0 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\qc\partightenfactor0
+
+\f0\b \cf2 \up0 \nosupersub \ulnone Description
+\f5\b0 \cf0 \up0 \nosupersub \ulnone \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clcbpat3 \clwWidth2480\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx2880
+\clvertalc \clcbpat3 \clwWidth2020\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx5760
+\clvertalc \clcbpat3 \clwWidth3380\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone user_id
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone INT PK/FK 
+\f6 \uc0\u8594 
+\f2  users
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone Identifies user
+\f5 \cf0 \up0 \nosupersub \ulnone \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth2480\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx2880
+\clvertalc \clshdrawnil \clwWidth2020\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx5760
+\clvertalc \clshdrawnil \clwWidth3380\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone dietary_preference
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone ENUM
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone Vegetarian, Vegan, etc.
+\f5 \cf0 \up0 \nosupersub \ulnone \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clcbpat3 \clwWidth2480\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx2880
+\clvertalc \clcbpat3 \clwWidth2020\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx5760
+\clvertalc \clcbpat3 \clwWidth3380\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone max_prep_time_min
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone INT
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone Max cooking time
+\f5 \cf0 \up0 \nosupersub \ulnone \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth2480\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx2880
+\clvertalc \clshdrawnil \clwWidth2020\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx5760
+\clvertalc \clshdrawnil \clwWidth3380\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone weekly_budget_cents
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone INT
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone Weekly budget
+\f5 \cf0 \up0 \nosupersub \ulnone \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clcbpat3 \clwWidth2480\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx2880
+\clvertalc \clcbpat3 \clwWidth2020\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx5760
+\clvertalc \clcbpat3 \clwWidth3380\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone default_days_in_plan
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone INT
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone Default meal plan length
+\f5 \cf0 \up0 \nosupersub \ulnone \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrt\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth2480\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx2880
+\clvertalc \clshdrawnil \clwWidth2020\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx5760
+\clvertalc \clshdrawnil \clwWidth3380\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone defaults_executive_mode
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone ENUM
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone NORMAL, LOW_SPOONS, etc.
+\f5 \cf0 \up0 \nosupersub \ulnone 
+\f2 \cf2 \up0 \nosupersub \ulnone \cell \lastrow\row
+\pard\pardeftab720\partightenfactor0
+\cf2 \
+\
+\pard\pardeftab720\partightenfactor0
+
+\f3\b\fs36 \cf2 3.3 INGREDIENTS\
+\pard\pardeftab720\sa240\partightenfactor0
+
+\f2\b0\fs24 \cf2 Ingredient catalog with optional Kroger mapping.\
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrt\brdrnil \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth1860\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx2880
+\clvertalc \clshdrawnil \clwWidth1760\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx5760
+\clvertalc \clshdrawnil \clwWidth3340\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\qc\partightenfactor0
+
+\f0\b \cf2 Field
+\f5\b0 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\qc\partightenfactor0
+
+\f0\b \cf2 \up0 \nosupersub \ulnone Type
+\f5\b0 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\qc\partightenfactor0
+
+\f0\b \cf2 \up0 \nosupersub \ulnone Description
+\f5\b0 \cf0 \up0 \nosupersub \ulnone \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clcbpat3 \clwWidth1860\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx2880
+\clvertalc \clcbpat3 \clwWidth1760\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx5760
+\clvertalc \clcbpat3 \clwWidth3340\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone ingredient_id
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone INT PK
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth1860\clftsWidth3 \clheight540 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx2880
+\clvertalc \clshdrawnil \clwWidth1760\clftsWidth3 \clheight540 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx5760
+\clvertalc \clshdrawnil \clwWidth3340\clftsWidth3 \clheight540 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone name
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone VARCHAR(255) UNIQUE
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone e.g., \'93Chicken Breast\'94
+\f5 \cf0 \up0 \nosupersub \ulnone \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clcbpat3 \clwWidth1860\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx2880
+\clvertalc \clcbpat3 \clwWidth1760\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx5760
+\clvertalc \clcbpat3 \clwWidth3340\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone default_unit
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone VARCHAR(50)
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone e.g., g, tbsp
+\f5 \cf0 \up0 \nosupersub \ulnone \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth1860\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx2880
+\clvertalc \clshdrawnil \clwWidth1760\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx5760
+\clvertalc \clshdrawnil \clwWidth3340\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone kroger_product_id
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone VARCHAR(100)
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone Optional
+\f5 \cf0 \up0 \nosupersub \ulnone \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clcbpat3 \clwWidth1860\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx2880
+\clvertalc \clcbpat3 \clwWidth1760\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx5760
+\clvertalc \clcbpat3 \clwWidth3340\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone kroger_location_id
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone VARCHAR(50)
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone Optional
+\f5 \cf0 \up0 \nosupersub \ulnone \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrt\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth1860\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx2880
+\clvertalc \clshdrawnil \clwWidth1760\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx5760
+\clvertalc \clshdrawnil \clwWidth3340\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone created_at
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone DATETIME
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 
+\f2 \cf2 \up0 \nosupersub \ulnone \cell \lastrow\row
+\pard\pardeftab720\partightenfactor0
+
+\f3\b\fs36 \cf2 3.4 RECIPES\
+\pard\pardeftab720\sa240\partightenfactor0
+
+\f2\b0\fs24 \cf2 Stores both user-created and imported recipes.\
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrt\brdrnil \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth1860\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx2880
+\clvertalc \clshdrawnil \clwWidth4180\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx5760
+\clvertalc \clshdrawnil \clwWidth3080\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\qc\partightenfactor0
+
+\f0\b \cf2 Field
+\f5\b0 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\qc\partightenfactor0
+
+\f0\b \cf2 \up0 \nosupersub \ulnone Type
+\f5\b0 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\qc\partightenfactor0
+
+\f0\b \cf2 \up0 \nosupersub \ulnone Description
+\f5\b0 \cf0 \up0 \nosupersub \ulnone \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clcbpat3 \clwWidth1860\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx2880
+\clvertalc \clcbpat3 \clwWidth4180\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx5760
+\clvertalc \clcbpat3 \clwWidth3080\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone recipe_id
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone INT PK
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth1860\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx2880
+\clvertalc \clshdrawnil \clwWidth4180\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx5760
+\clvertalc \clshdrawnil \clwWidth3080\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone user_id
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone INT FK
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone Null if imported
+\f5 \cf0 \up0 \nosupersub \ulnone \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clcbpat3 \clwWidth1860\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx2880
+\clvertalc \clcbpat3 \clwWidth4180\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx5760
+\clvertalc \clcbpat3 \clwWidth3080\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone title
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone VARCHAR(255)
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth1860\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx2880
+\clvertalc \clshdrawnil \clwWidth4180\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx5760
+\clvertalc \clshdrawnil \clwWidth3080\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone description
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone TEXT
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clcbpat3 \clwWidth1860\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx2880
+\clvertalc \clcbpat3 \clwWidth4180\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx5760
+\clvertalc \clcbpat3 \clwWidth3080\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone total_time_min
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone INT
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth1860\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx2880
+\clvertalc \clshdrawnil \clwWidth4180\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx5760
+\clvertalc \clshdrawnil \clwWidth3080\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone servings
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone INT
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clcbpat3 \clwWidth1860\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx2880
+\clvertalc \clcbpat3 \clwWidth4180\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx5760
+\clvertalc \clcbpat3 \clwWidth3080\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone difficulty
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone ENUM
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth1860\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx2880
+\clvertalc \clshdrawnil \clwWidth4180\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx5760
+\clvertalc \clshdrawnil \clwWidth3080\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone is_public
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone BOOL
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clcbpat3 \clwWidth1860\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx2880
+\clvertalc \clcbpat3 \clwWidth4180\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx5760
+\clvertalc \clcbpat3 \clwWidth3080\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone source_type
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone ENUM('USER','THEMEALDB','OTHER')
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone Tracks where recipe came from
+\f5 \cf0 \up0 \nosupersub \ulnone \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth1860\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx2880
+\clvertalc \clshdrawnil \clwWidth4180\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx5760
+\clvertalc \clshdrawnil \clwWidth3080\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone source_external_id
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone VARCHAR(100)
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone e.g. TheMealDB idMeal
+\f5 \cf0 \up0 \nosupersub \ulnone \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clcbpat3 \clwWidth1860\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx2880
+\clvertalc \clcbpat3 \clwWidth4180\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx5760
+\clvertalc \clcbpat3 \clwWidth3080\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone source_url
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone VARCHAR(500)
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone Optional
+\f5 \cf0 \up0 \nosupersub \ulnone \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth1860\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx2880
+\clvertalc \clshdrawnil \clwWidth4180\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx5760
+\clvertalc \clshdrawnil \clwWidth3080\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone thumbnail_url
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone VARCHAR(500)
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone For UI preview
+\f5 \cf0 \up0 \nosupersub \ulnone \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clcbpat3 \clwWidth1860\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx2880
+\clvertalc \clcbpat3 \clwWidth4180\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx5760
+\clvertalc \clcbpat3 \clwWidth3080\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone youtube_url
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone VARCHAR(500)
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone If recipe has a video
+\f5 \cf0 \up0 \nosupersub \ulnone \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth1860\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx2880
+\clvertalc \clshdrawnil \clwWidth4180\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx5760
+\clvertalc \clshdrawnil \clwWidth3080\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone created_at
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone DATETIME
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrt\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clcbpat3 \clwWidth1860\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx2880
+\clvertalc \clcbpat3 \clwWidth4180\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx5760
+\clvertalc \clcbpat3 \clwWidth3080\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone updated_at
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone DATETIME
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 
+\f2 \cf2 \up0 \nosupersub \ulnone \cell \lastrow\row
+\pard\pardeftab720\partightenfactor0
+\cf2 \
+\
+\pard\pardeftab720\partightenfactor0
+
+\f3\b\fs36 \cf2 3.5 RECIPE_STEPS\
+\pard\pardeftab720\sa240\partightenfactor0
+
+\f2\b0\fs24 \cf2 Ordered list of instructions.\
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrt\brdrnil \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth1060\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx2880
+\clvertalc \clshdrawnil \clwWidth800\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx5760
+\clvertalc \clshdrawnil \clwWidth1380\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\qc\partightenfactor0
+
+\f0\b \cf2 Field
+\f5\b0 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\qc\partightenfactor0
+
+\f0\b \cf2 \up0 \nosupersub \ulnone Type
+\f5\b0 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\qc\partightenfactor0
+
+\f0\b \cf2 \up0 \nosupersub \ulnone Description
+\f5\b0 \cf0 \up0 \nosupersub \ulnone \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clcbpat3 \clwWidth1060\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx2880
+\clvertalc \clcbpat3 \clwWidth800\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx5760
+\clvertalc \clcbpat3 \clwWidth1380\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone step_id
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone INT PK
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth1060\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx2880
+\clvertalc \clshdrawnil \clwWidth800\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx5760
+\clvertalc \clshdrawnil \clwWidth1380\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone recipe_id
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone INT FK
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clcbpat3 \clwWidth1060\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx2880
+\clvertalc \clcbpat3 \clwWidth800\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx5760
+\clvertalc \clcbpat3 \clwWidth1380\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone step_order
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone INT
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone Rank/position
+\f5 \cf0 \up0 \nosupersub \ulnone \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrt\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth1060\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx2880
+\clvertalc \clshdrawnil \clwWidth800\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx5760
+\clvertalc \clshdrawnil \clwWidth1380\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone instruction
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone TEXT
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 
+\f2 \cf2 \up0 \nosupersub \ulnone \cell \lastrow\row
+\pard\pardeftab720\partightenfactor0
+\cf2 \
+\
+\pard\pardeftab720\partightenfactor0
+
+\f3\b\fs36 \cf2 3.6 RECIPE_INGREDIENTS\
+\pard\pardeftab720\sa240\partightenfactor0
+
+\f2\b0\fs24 \cf2 Junction table connecting recipes 
+\f6 \uc0\u8596 
+\f2  ingredients.\
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrt\brdrnil \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth2020\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx2880
+\clvertalc \clshdrawnil \clwWidth1720\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx5760
+\clvertalc \clshdrawnil \clwWidth3200\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\qc\partightenfactor0
+
+\f0\b \cf2 Field
+\f5\b0 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\qc\partightenfactor0
+
+\f0\b \cf2 \up0 \nosupersub \ulnone Type
+\f5\b0 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\qc\partightenfactor0
+
+\f0\b \cf2 \up0 \nosupersub \ulnone Description
+\f5\b0 \cf0 \up0 \nosupersub \ulnone \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clcbpat3 \clwWidth2020\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx2880
+\clvertalc \clcbpat3 \clwWidth1720\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx5760
+\clvertalc \clcbpat3 \clwWidth3200\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone recipe_ingredient_id
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone INT PK
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth2020\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx2880
+\clvertalc \clshdrawnil \clwWidth1720\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx5760
+\clvertalc \clshdrawnil \clwWidth3200\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone recipe_id
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone INT FK
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clcbpat3 \clwWidth2020\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx2880
+\clvertalc \clcbpat3 \clwWidth1720\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx5760
+\clvertalc \clcbpat3 \clwWidth3200\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone ingredient_id
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone INT FK
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth2020\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx2880
+\clvertalc \clshdrawnil \clwWidth1720\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx5760
+\clvertalc \clshdrawnil \clwWidth3200\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone quantity
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone DECIMAL(10,2)
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clcbpat3 \clwWidth2020\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx2880
+\clvertalc \clcbpat3 \clwWidth1720\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx5760
+\clvertalc \clcbpat3 \clwWidth3200\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone unit
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone VARCHAR(50)
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone NULL uses default unit
+\f5 \cf0 \up0 \nosupersub \ulnone \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrt\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth2020\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx2880
+\clvertalc \clshdrawnil \clwWidth1720\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx5760
+\clvertalc \clshdrawnil \clwWidth3200\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone note
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone VARCHAR(255)
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone \'93chopped\'94, \'93minced\'94, etc.
+\f5 \cf0 \up0 \nosupersub \ulnone 
+\f2 \cf2 \up0 \nosupersub \ulnone \cell \lastrow\row
+\pard\pardeftab720\partightenfactor0
+\cf2 \
+\
+\pard\pardeftab720\partightenfactor0
+
+\f3\b\fs36 \cf2 3.7 TAGS & RECIPE_TAGS\
+\pard\pardeftab720\sa240\partightenfactor0
+
+\f2\b0\fs24 \cf2 Tags categorize recipes by:\
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sa240\partightenfactor0
+\ls4\ilvl0\cf2 \up0 \nosupersub \ulnone {\listtext	\uc0\u8226 	}\up0 \nosupersub \ulnone Dietary preference\
+\ls4\ilvl0\up0 \nosupersub \ulnone {\listtext	\uc0\u8226 	}\up0 \nosupersub \ulnone Meal type\
+\ls4\ilvl0\up0 \nosupersub \ulnone {\listtext	\uc0\u8226 	}\up0 \nosupersub \ulnone Time cost\
+\ls4\ilvl0\up0 \nosupersub \ulnone {\listtext	\uc0\u8226 	}\up0 \nosupersub \ulnone Budget level\
+\ls4\ilvl0\up0 \nosupersub \ulnone {\listtext	\uc0\u8226 	}\up0 \nosupersub \ulnone Occasion\
+\ls4\ilvl0\up0 \nosupersub \ulnone {\listtext	\uc0\u8226 	}\up0 \nosupersub \ulnone etc.\
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrt\brdrnil \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth860\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx2880
+\clvertalc \clshdrawnil \clwWidth2680\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx5760
+\clvertalc \clshdrawnil \clwWidth3180\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\qc\partightenfactor0
+
+\f0\b \cf2 Field
+\f5\b0 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\qc\partightenfactor0
+
+\f0\b \cf2 \up0 \nosupersub \ulnone Type
+\f5\b0 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\qc\partightenfactor0
+
+\f0\b \cf2 \up0 \nosupersub \ulnone Description
+\f5\b0 \cf0 \up0 \nosupersub \ulnone \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clcbpat3 \clwWidth860\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx2880
+\clvertalc \clcbpat3 \clwWidth2680\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx5760
+\clvertalc \clcbpat3 \clwWidth3180\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone tag_id
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone INT PK
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth860\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx2880
+\clvertalc \clshdrawnil \clwWidth2680\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx5760
+\clvertalc \clshdrawnil \clwWidth3180\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone name
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone VARCHAR(100) UNIQUE
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrt\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clcbpat3 \clwWidth860\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx2880
+\clvertalc \clcbpat3 \clwWidth2680\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx5760
+\clvertalc \clcbpat3 \clwWidth3180\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone category
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone ENUM
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 
+\f2 \cf2 \up0 \nosupersub \ulnone \cell \lastrow\row
+\pard\pardeftab720\partightenfactor0
+
+\f1\fs22 \cf2 \
+\pard\pardeftab720\partightenfactor0
+
+\f3\b \cf2 recipe_tags
+\f1\b0 \
+Junction between recipes and tags.\
+\
+\pard\pardeftab720\partightenfactor0
+
+\f3\b\fs36 \cf2 3.8 MEAL_PLANS\
+\pard\pardeftab720\sa240\partightenfactor0
+
+\f2\b0\fs24 \cf2 Meal plans defined by the user.\
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrt\brdrnil \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth1340\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx2880
+\clvertalc \clshdrawnil \clwWidth1700\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx5760
+\clvertalc \clshdrawnil \clwWidth4540\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\qc\partightenfactor0
+
+\f0\b \cf2 Field
+\f5\b0 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\qc\partightenfactor0
+
+\f0\b \cf2 \up0 \nosupersub \ulnone Type
+\f5\b0 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\qc\partightenfactor0
+
+\f0\b \cf2 \up0 \nosupersub \ulnone Description
+\f5\b0 \cf0 \up0 \nosupersub \ulnone \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clcbpat3 \clwWidth1340\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx2880
+\clvertalc \clcbpat3 \clwWidth1700\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx5760
+\clvertalc \clcbpat3 \clwWidth4540\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone meal_plan_id
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone INT PK
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth1340\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx2880
+\clvertalc \clshdrawnil \clwWidth1700\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx5760
+\clvertalc \clshdrawnil \clwWidth4540\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone user_id
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone INT FK
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clcbpat3 \clwWidth1340\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx2880
+\clvertalc \clcbpat3 \clwWidth1700\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx5760
+\clvertalc \clcbpat3 \clwWidth4540\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone name
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone VARCHAR(255)
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone e.g. \'93Weeknight Dinners\'94
+\f5 \cf0 \up0 \nosupersub \ulnone \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth1340\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx2880
+\clvertalc \clshdrawnil \clwWidth1700\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx5760
+\clvertalc \clshdrawnil \clwWidth4540\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone start_date
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone DATE
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clcbpat3 \clwWidth1340\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx2880
+\clvertalc \clcbpat3 \clwWidth1700\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx5760
+\clvertalc \clcbpat3 \clwWidth4540\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone end_date
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone DATE
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrt\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth1340\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx2880
+\clvertalc \clshdrawnil \clwWidth1700\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx5760
+\clvertalc \clshdrawnil \clwWidth4540\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone created_at
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone DATE
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 
+\f2 \cf2 \up0 \nosupersub \ulnone \cell \lastrow\row
+\pard\pardeftab720\partightenfactor0
+
+\f1\fs22 \cf2 \
+\
+\pard\pardeftab720\partightenfactor0
+
+\f3\b\fs36 \cf2 3.9 MEAL_PLAN_ITEMS\
+\pard\pardeftab720\sa240\partightenfactor0
+
+\f2\b0\fs24 \cf2 Specific meals placed on specific days.\
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrt\brdrnil \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth1880\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx2880
+\clvertalc \clshdrawnil \clwWidth1700\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx5760
+\clvertalc \clshdrawnil \clwWidth3400\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\qc\partightenfactor0
+
+\f0\b \cf2 Field
+\f5\b0 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\qc\partightenfactor0
+
+\f0\b \cf2 \up0 \nosupersub \ulnone Type
+\f5\b0 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\qc\partightenfactor0
+
+\f0\b \cf2 \up0 \nosupersub \ulnone Description
+\f5\b0 \cf0 \up0 \nosupersub \ulnone \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clcbpat3 \clwWidth1880\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx2880
+\clvertalc \clcbpat3 \clwWidth1700\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx5760
+\clvertalc \clcbpat3 \clwWidth3400\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone meal_plan_item_id
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone INT PK
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth1880\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx2880
+\clvertalc \clshdrawnil \clwWidth1700\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx5760
+\clvertalc \clshdrawnil \clwWidth3400\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone meal_plan_id
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone INT FK
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clcbpat3 \clwWidth1880\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx2880
+\clvertalc \clcbpat3 \clwWidth1700\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx5760
+\clvertalc \clcbpat3 \clwWidth3400\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone plan_date
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone DATE
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth1880\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx2880
+\clvertalc \clshdrawnil \clwWidth1700\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx5760
+\clvertalc \clshdrawnil \clwWidth3400\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone meal_type
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone ENUM
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone Breakfast/Lunch/Dinner/Snack
+\f5 \cf0 \up0 \nosupersub \ulnone \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clcbpat3 \clwWidth1880\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx2880
+\clvertalc \clcbpat3 \clwWidth1700\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx5760
+\clvertalc \clcbpat3 \clwWidth3400\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone recipe_id
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone INT FK
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrt\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth1880\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx2880
+\clvertalc \clshdrawnil \clwWidth1700\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx5760
+\clvertalc \clshdrawnil \clwWidth3400\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone notes
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone VARCHAR(255)
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 
+\f2 \cf2 \up0 \nosupersub \ulnone \cell \lastrow\row
+\pard\pardeftab720\partightenfactor0
+\cf2 \
+\
+\pard\pardeftab720\partightenfactor0
+
+\f3\b\fs36 \cf2 3.10 GROCERY_LISTS\
+\pard\pardeftab720\sa240\partightenfactor0
+
+\f2\b0\fs24 \cf2 Lists generated from meal plans.\
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrt\brdrnil \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth1500\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx2880
+\clvertalc \clshdrawnil \clwWidth1700\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx5760
+\clvertalc \clshdrawnil \clwWidth3320\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\qc\partightenfactor0
+
+\f0\b \cf2 Field
+\f5\b0 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\qc\partightenfactor0
+
+\f0\b \cf2 \up0 \nosupersub \ulnone Type
+\f5\b0 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\qc\partightenfactor0
+
+\f0\b \cf2 \up0 \nosupersub \ulnone Description
+\f5\b0 \cf0 \up0 \nosupersub \ulnone \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clcbpat3 \clwWidth1500\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx2880
+\clvertalc \clcbpat3 \clwWidth1700\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx5760
+\clvertalc \clcbpat3 \clwWidth3320\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone grocery_list_id
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone INT PK
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth1500\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx2880
+\clvertalc \clshdrawnil \clwWidth1700\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx5760
+\clvertalc \clshdrawnil \clwWidth3320\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone user_id
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone INT FK
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clcbpat3 \clwWidth1500\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx2880
+\clvertalc \clcbpat3 \clwWidth1700\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx5760
+\clvertalc \clcbpat3 \clwWidth3320\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone meal_plan_id
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone INT FK NULL
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone Optional
+\f5 \cf0 \up0 \nosupersub \ulnone \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth1500\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx2880
+\clvertalc \clshdrawnil \clwWidth1700\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx5760
+\clvertalc \clshdrawnil \clwWidth3320\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone name
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone VARCHAR(255)
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrt\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clcbpat3 \clwWidth1500\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx2880
+\clvertalc \clcbpat3 \clwWidth1700\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx5760
+\clvertalc \clcbpat3 \clwWidth3320\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone created_at
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone DATETIME
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 
+\f2 \cf2 \up0 \nosupersub \ulnone \cell \lastrow\row
+\pard\pardeftab720\partightenfactor0
+\cf2 \
+\
+\pard\pardeftab720\partightenfactor0
+
+\f3\b\fs36 \cf2 3.11 GROCERY_LIST_ITEMS\
+\pard\pardeftab720\sa240\partightenfactor0
+
+\f2\b0\fs24 \cf2 Aggregated items to purchase.\
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrt\brdrnil \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth2040\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx2880
+\clvertalc \clshdrawnil \clwWidth1720\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx5760
+\clvertalc \clshdrawnil \clwWidth3160\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\qc\partightenfactor0
+
+\f0\b \cf2 Field
+\f5\b0 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\qc\partightenfactor0
+
+\f0\b \cf2 \up0 \nosupersub \ulnone Type
+\f5\b0 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\qc\partightenfactor0
+
+\f0\b \cf2 \up0 \nosupersub \ulnone Description
+\f5\b0 \cf0 \up0 \nosupersub \ulnone \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clcbpat3 \clwWidth2040\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx2880
+\clvertalc \clcbpat3 \clwWidth1720\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx5760
+\clvertalc \clcbpat3 \clwWidth3160\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone grocery_list_item_id
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone INT PK
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth2040\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx2880
+\clvertalc \clshdrawnil \clwWidth1720\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx5760
+\clvertalc \clshdrawnil \clwWidth3160\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone grocery_list_id
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone INT FK
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clcbpat3 \clwWidth2040\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx2880
+\clvertalc \clcbpat3 \clwWidth1720\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx5760
+\clvertalc \clcbpat3 \clwWidth3160\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone ingredient_id
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone INT FK
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth2040\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx2880
+\clvertalc \clshdrawnil \clwWidth1720\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx5760
+\clvertalc \clshdrawnil \clwWidth3160\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone quantity
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone DECIMAL(10,2)
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clcbpat3 \clwWidth2040\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx2880
+\clvertalc \clcbpat3 \clwWidth1720\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx5760
+\clvertalc \clcbpat3 \clwWidth3160\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone unit
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone VARCHAR(50)
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth2040\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx2880
+\clvertalc \clshdrawnil \clwWidth1720\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx5760
+\clvertalc \clshdrawnil \clwWidth3160\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone is_purchased
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone BOOL
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrt\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clcbpat3 \clwWidth2040\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx2880
+\clvertalc \clcbpat3 \clwWidth1720\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx5760
+\clvertalc \clcbpat3 \clwWidth3160\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone kroger_product_id
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone VARCHAR(100)
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone Optional
+\f5 \cf0 \up0 \nosupersub \ulnone 
+\f2 \cf2 \up0 \nosupersub \ulnone \cell \lastrow\row
+\pard\pardeftab720\partightenfactor0
+\cf2 \
+\
+\pard\pardeftab720\partightenfactor0
+
+\f3\b\fs36 \cf2 3.12 EXTERNAL_RECIPE_CACHE\
+\pard\pardeftab720\sa240\partightenfactor0
+
+\f2\b0\fs24 \cf2 Stores TheMealDB JSON responses to avoid re-fetching.\
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrt\brdrnil \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth1860\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx2880
+\clvertalc \clshdrawnil \clwWidth3980\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx5760
+\clvertalc \clshdrawnil \clwWidth2060\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\qc\partightenfactor0
+
+\f0\b \cf2 Field
+\f5\b0 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\qc\partightenfactor0
+
+\f0\b \cf2 \up0 \nosupersub \ulnone Type
+\f5\b0 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\qc\partightenfactor0
+
+\f0\b \cf2 \up0 \nosupersub \ulnone Description
+\f5\b0 \cf0 \up0 \nosupersub \ulnone \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clcbpat3 \clwWidth1860\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx2880
+\clvertalc \clcbpat3 \clwWidth3980\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx5760
+\clvertalc \clcbpat3 \clwWidth2060\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone cache_id
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone INT PK
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth1860\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx2880
+\clvertalc \clshdrawnil \clwWidth3980\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx5760
+\clvertalc \clshdrawnil \clwWidth2060\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone source_type
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone ENUM('THEMEALDB')
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clcbpat3 \clwWidth1860\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx2880
+\clvertalc \clcbpat3 \clwWidth3980\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx5760
+\clvertalc \clcbpat3 \clwWidth2060\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone source_external_id
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone VARCHAR(100)
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth1860\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx2880
+\clvertalc \clshdrawnil \clwWidth3980\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx5760
+\clvertalc \clshdrawnil \clwWidth2060\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone raw_json
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone JSON
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrt\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clcbpat3 \clwWidth1860\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx2880
+\clvertalc \clcbpat3 \clwWidth3980\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx5760
+\clvertalc \clcbpat3 \clwWidth2060\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone fetched_at
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f2 \cf2 \up0 \nosupersub \ulnone DATETIME
+\f5 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 
+\f2 \cf2 \up0 \nosupersub \ulnone \cell \lastrow\row
+\pard\pardeftab720\partightenfactor0
+\cf2 \
+\
+\pard\pardeftab720\partightenfactor0
+
+\f1\fs40 \cf2 4. Foreign Key Dependencies (Quick Reference)\
+\pard\tx220\tx643\pardeftab720\li643\fi-644\partightenfactor0
+\ls5\ilvl0
+\f7\fs22 \cf2 \up0 \nosupersub \ulnone {\listtext	\uc0\u8226 	}
+\f1 \up0 \nosupersub \ulnone user_preferences.user_id 
+\f4 \uc0\u8594 
+\f1  users.user_id
+\f2\fs24 \
+\ls5\ilvl0
+\f7\fs22 \up0 \nosupersub \ulnone {\listtext	\uc0\u8226 	}
+\f1 \up0 \nosupersub \ulnone recipes.user_id 
+\f4 \uc0\u8594 
+\f1  users.user_id
+\f2\fs24 \
+\ls5\ilvl0
+\f7\fs22 \up0 \nosupersub \ulnone {\listtext	\uc0\u8226 	}
+\f1 \up0 \nosupersub \ulnone recipe_steps.recipe_id 
+\f4 \uc0\u8594 
+\f1  recipes.recipe_id
+\f2\fs24 \
+\ls5\ilvl0
+\f7\fs22 \up0 \nosupersub \ulnone {\listtext	\uc0\u8226 	}
+\f1 \up0 \nosupersub \ulnone recipe_ingredients.recipe_id 
+\f4 \uc0\u8594 
+\f1  recipes.recipe_id
+\f2\fs24 \
+\ls5\ilvl0
+\f7\fs22 \up0 \nosupersub \ulnone {\listtext	\uc0\u8226 	}
+\f1 \up0 \nosupersub \ulnone recipe_ingredients.ingredient_id 
+\f4 \uc0\u8594 
+\f1  ingredients.ingredient_id
+\f2\fs24 \
+\ls5\ilvl0
+\f7\fs22 \up0 \nosupersub \ulnone {\listtext	\uc0\u8226 	}
+\f1 \up0 \nosupersub \ulnone recipe_tags.recipe_id 
+\f4 \uc0\u8594 
+\f1  recipes.recipe_id
+\f2\fs24 \
+\ls5\ilvl0
+\f7\fs22 \up0 \nosupersub \ulnone {\listtext	\uc0\u8226 	}
+\f1 \up0 \nosupersub \ulnone recipe_tags.tag_id 
+\f4 \uc0\u8594 
+\f1  tags.tag_id
+\f2\fs24 \
+\ls5\ilvl0
+\f7\fs22 \up0 \nosupersub \ulnone {\listtext	\uc0\u8226 	}
+\f1 \up0 \nosupersub \ulnone meal_plans.user_id 
+\f4 \uc0\u8594 
+\f1  users.user_id
+\f2\fs24 \
+\ls5\ilvl0
+\f7\fs22 \up0 \nosupersub \ulnone {\listtext	\uc0\u8226 	}
+\f1 \up0 \nosupersub \ulnone meal_plan_items.meal_plan_id 
+\f4 \uc0\u8594 
+\f1  meal_plans.meal_plan_id
+\f2\fs24 \
+\ls5\ilvl0
+\f7\fs22 \up0 \nosupersub \ulnone {\listtext	\uc0\u8226 	}
+\f1 \up0 \nosupersub \ulnone meal_plan_items.recipe_id 
+\f4 \uc0\u8594 
+\f1  recipes.recipe_id
+\f2\fs24 \
+\ls5\ilvl0
+\f7\fs22 \up0 \nosupersub \ulnone {\listtext	\uc0\u8226 	}
+\f1 \up0 \nosupersub \ulnone grocery_lists.user_id 
+\f4 \uc0\u8594 
+\f1  users.user_id
+\f2\fs24 \
+\ls5\ilvl0
+\f7\fs22 \up0 \nosupersub \ulnone {\listtext	\uc0\u8226 	}
+\f1 \up0 \nosupersub \ulnone grocery_lists.meal_plan_id 
+\f4 \uc0\u8594 
+\f1  meal_plans.meal_plan_id
+\f2\fs24 \
+\ls5\ilvl0
+\f7\fs22 \up0 \nosupersub \ulnone {\listtext	\uc0\u8226 	}
+\f1 \up0 \nosupersub \ulnone grocery_list_items.grocery_list_id 
+\f4 \uc0\u8594 
+\f1  grocery_lists.grocery_list_id
+\f2\fs24 \
+\ls5\ilvl0
+\f7\fs22 \up0 \nosupersub \ulnone {\listtext	\uc0\u8226 	}
+\f1 \up0 \nosupersub \ulnone grocery_list_items.ingredient_id 
+\f4 \uc0\u8594 
+\f1  ingredients.ingredient_id
+\f2\fs24 \
+}
