@@ -1,0 +1,18 @@
+{
+	"USERS":[
+	{"user_id":283295,"email":"johndoe01@jmail.com", "password_hash":200, "full_name":"John Doe", "created_at":"2025-11-28",
+	"updated_at":"2025-11-28"}
+	]
+	
+	"USER_PREFERENCES":[
+	{"user_id":283295,"dietary_preference":"Vegetarian", "max_prep_time_min":120,"weekly_budget_cents":"9800",
+	"default_days_in_plan":5, "default","defaults_executive_mode":"NORMAL"
+		}
+	]
+	
+	"INGREDIENTS":[
+	{
+		}
+	]
+	
+}

@@ -1,0 +1,7 @@
+{
+	"grocery_list_items":[
+	{"grocery_list_item_id":4482, "grocery_list_id":44982,"ingredient_id":20365, "quantity":1.5, "unit":"lbs",
+	"is_purchased":true,"kroger_product_id":null
+		}
+	]
+}

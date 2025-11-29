@@ -1,0 +1,7 @@
+{
+	"ingredients":[
+	{"ingredient_id":1290,"name":"rice","default_unit":"lbs","kroger_product_id":"A00238","kroger_location_id":null,
+	"created_at":"2025-11-28"
+		}
+	]
+}	

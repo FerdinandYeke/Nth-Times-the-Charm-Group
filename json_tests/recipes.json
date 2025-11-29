@@ -1,0 +1,9 @@
+{
+	"recipes":[
+	{"recipe_id":20298, "user_id":283295, "title":"Steamed Rice", "description":"Recipe of making steamed rice",
+	"total_time_min":25, "servings":10, "difficulty":"Easy", "is_public":true, "source_type":"USER",
+	"source_external_id":"TheMealDB idMeal", "source_url":"TBD", "thumbnail_url":"TBD","youtube_url":"TBD",
+	"created_at":"2015-07-03","updated_at":"2024-02-15"
+		}
+	]
+}
