@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Recipeté – Recipes</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #faeddc;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      color: #0f1a2a;
+    }
+    #recipes {
+      margin-top: 20px;
+    }
+    .recipe-card {
+      background: #ede0f0;
+      padding: 12px 16px;
+      margin-bottom: 10px;
+      border-radius: 8px;
+    }
+    .recipe-title {
+      font-weight: bold;
+      margin-bottom: 4px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Recipeté Recipes</h1>
+  <p>This page is served by Flask inside Docker and loads recipes from <code>/api/recipes</code>.</p>
+
+  <div id="recipes">Loading recipes...</div>
+
+  <script>
+    async function loadRecipes() {
+      try {
+        const resp = await fetch("/api/recipes");
+        if (!resp.ok) {
+          document.getElementById("recipes").textContent =
+            "Error loading recipes: " + resp.status;
+          return;
+        }
+        const data = await resp.json();
+        const container = document.getElementById("recipes");
+        container.innerHTML = "";
+
+        if (!data.length) {
+          container.textContent = "No recipes yet.";
+          return;
+        }
+
+        data.forEach(r => {
+          const div = document.createElement("div");
+          div.className = "recipe-card";
+
+          const title = document.createElement("div");
+          title.className = "recipe-title";
+          title.textContent = r.title;
+
+          const desc = document.createElement("div");
+          desc.textContent = r.description || "(No description)";
+
+          div.appendChild(title);
+          div.appendChild(desc);
+          container.appendChild(div);
+        });
+      } catch (e) {
+        document.getElementById("recipes").textContent =
+          "Error: " + e;
+      }
+    }
+
+    loadRecipes();
+  </script>
+</body>
+</html>

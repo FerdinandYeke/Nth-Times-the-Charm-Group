@@ -1,0 +1,65 @@
+### ------------------------------
+### Health Check
+### ------------------------------
+GET http://localhost:5001/api/health
+Accept: application/json
+
+
+
+### ------------------------------
+### List All Recipes
+### ------------------------------
+GET http://localhost:5001/api/recipes
+Accept: application/json
+
+
+
+### ------------------------------
+### Get Recipe by ID
+### ------------------------------
+# Change 1 to an actual recipe_id in your DB
+GET http://localhost:5001/api/recipes/1
+Accept: application/json
+
+
+
+### ------------------------------
+### Search TheMealDB (Optional)
+### Example: search "chicken"
+### ------------------------------
+GET https://www.themealdb.com/api/json/v1/1/search.php?s=chicken
+Accept: application/json
+
+
+
+### ------------------------------
+### Import Recipe from TheMealDB
+### Example ID: 52772
+### ------------------------------
+POST http://localhost:5001/api/external/themealdb/import/52772
+Accept: application/json
+
+
+
+### ------------------------------
+### Create a Meal Plan
+### ------------------------------
+POST http://localhost:5001/api/meal-plans
+Content-Type: application/json
+
+{
+  "user_id": 1,
+  "name": "Demo Plan",
+  "start_date": "2025-12-01",
+  "end_date": "2025-12-03",
+  "recipe_ids": [1, 2]
+}
+
+
+
+### ------------------------------
+### Get Grocery List for a Meal Plan
+### ------------------------------
+# Replace 1 with the meal_plan_id returned from the POST above
+GET http://localhost:5001/api/meal-plans/1/grocery-list
+Accept: application/json
