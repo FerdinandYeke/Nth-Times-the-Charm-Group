@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, render_template
 from db import get_db_connection
 
 app = Flask(__name__)
@@ -27,6 +27,9 @@ def health():
         "database": db_status
     })
 
+@app.route("/")
+def home():
+    return render_template("index.html")
 
 @app.route("/api/recipes", methods=["GET"])
 def list_recipes():
