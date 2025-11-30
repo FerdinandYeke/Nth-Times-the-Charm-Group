@@ -14,7 +14,7 @@ def import_meal_from_mealdb(id_meal: str) -> int:
     #Check if recipe already imported
     cur.execute(
         """
-        SELECT recipe_id FROM list_recipes
+        SELECT recipe_id FROM recipes
         WHERE source_type = 'THEMEALDB' and source_external_id = %s
         """,
         (id_meal,)
@@ -90,7 +90,7 @@ def import_meal_from_mealdb(id_meal: str) -> int:
             ingredient_id = row["ingredient_id"]
         else:
             cur.execute(
-                "INSERT INTO ingredients (name, default_unit) VALES (%s, NULL)",
+                "INSERT INTO ingredients (name, default_unit) VALUES (%s, NULL)",
                 (ing_name,)
             )
             ingredient_id = cur.lastrowid
@@ -242,6 +242,27 @@ def get_recipe(recipe_id):
     recipe["steps"] = steps
 
     return jsonify(recipe)
+
+@app.route("/api/external/themealdb/import/<id_meal>", methods=["POST"])
+def import_themealdb_recipe(id_meal):
+    """
+    Import a recipe from TheMealDB by idMeal and store it in the local DB.
+    Returns the local recipe_id.
+    """
+    try:
+        recipe_id = import_meal_from_mealdb(id_meal)
+        return jsonify({
+            "recipe_id": recipe_id,
+            "source_type": "THEMEALDB",
+            "source_external_id": id_meal
+        }), 201
+    except ValueError as ve:
+        # e.g., meal not found
+        return jsonify({"error": str(ve)}), 404
+    except Exception as e:
+        # generic error
+        return jsonify({"error": str(e)}), 500
+
 
 if __name__ == "__main__":
     # For local debugging (not used inside Docker, but handy if you run python app.py directly)
