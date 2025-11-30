@@ -3,38 +3,57 @@
 <head>
   <meta charset="UTF-8" />
   <title>Recipeté – Recipes</title>
+  <link rel="stylesheet" href="main.css" />  <!-- Keep your CSS file -->
+  
   <style>
+    /* Only include styling if main.css doesn't fully style UI */
     body {
       font-family: Arial, sans-serif;
       background: #faeddc;
       margin: 0;
       padding: 20px;
     }
-    h1 {
-      color: #0f1a2a;
-    }
-    #recipes {
-      margin-top: 20px;
-    }
+    h1 { color: #0f1a2a; }
+    #recipes { margin-top: 20px; }
+
     .recipe-card {
       background: #ede0f0;
       padding: 12px 16px;
       margin-bottom: 10px;
       border-radius: 8px;
     }
-    .recipe-title {
-      font-weight: bold;
-      margin-bottom: 4px;
+    .recipe-title { font-weight: bold; margin-bottom: 4px; }
+
+    /* 🔍 Search box styling */
+    #ingredientFilter {
+      width: 300px;
+      padding: 8px 10px;
+      margin-top: 10px;
+      border-radius: 8px;
+      border: 2px solid #c89deb;
+      background: #fff8ef;
+      font-size: 15px;
+    }
+    #ingredientFilter:focus {
+      border-color: #9e5add;
+      background: white;
     }
   </style>
 </head>
+
 <body>
   <h1>Recipeté Recipes</h1>
-  <p>This page is served by Flask inside Docker and loads recipes from <code>/api/recipes</code>.</p>
+  <p>This page loads live data from <code>/api/recipes</code>.</p>
+
+  <!-- 🔍 Ingredient filter input -->
+  <input id="ingredientFilter" type="text" placeholder="Filter by ingredients (e.g. egg, sugar, flour)">
+  <small>Shows only recipes that contain all listed ingredients</small>
 
   <div id="recipes">Loading recipes...</div>
 
   <script>
+    let allRecipes = []; // store full list so we can filter locally
+
     async function loadRecipes() {
       try {
         const resp = await fetch("/api/recipes");
@@ -43,35 +62,60 @@
             "Error loading recipes: " + resp.status;
           return;
         }
-        const data = await resp.json();
-        const container = document.getElementById("recipes");
-        container.innerHTML = "";
 
-        if (!data.length) {
-          container.textContent = "No recipes yet.";
-          return;
-        }
+        allRecipes = await resp.json();  // store original list
+        renderRecipes(allRecipes);
 
-        data.forEach(r => {
-          const div = document.createElement("div");
-          div.className = "recipe-card";
-
-          const title = document.createElement("div");
-          title.className = "recipe-title";
-          title.textContent = r.title;
-
-          const desc = document.createElement("div");
-          desc.textContent = r.description || "(No description)";
-
-          div.appendChild(title);
-          div.appendChild(desc);
-          container.appendChild(div);
-        });
       } catch (e) {
-        document.getElementById("recipes").textContent =
-          "Error: " + e;
+        document.getElementById("recipes").textContent = "Error: " + e;
       }
     }
+
+    /* 🔥 Filters recipes based on typed ingredients */
+    function filterRecipes() {
+      const query = document.getElementById("ingredientFilter").value
+        .toLowerCase().split(",").map(v => v.trim()).filter(v => v);
+
+      if (query.length === 0) return renderRecipes(allRecipes);
+
+      const results = allRecipes.filter(r =>
+        query.every(ing =>
+          (r.ingredients || "").toLowerCase().includes(ing)
+        )
+      );
+
+      renderRecipes(results);
+    }
+
+    /* 📌 Render visible results on screen */
+    function renderRecipes(list) {
+      const container = document.getElementById("recipes");
+      container.innerHTML = "";
+
+      if (!list.length) {
+        container.textContent = "No matching recipes.";
+        return;
+      }
+
+      list.forEach(r => {
+        const div = document.createElement("div");
+        div.className = "recipe-card";
+
+        const title = document.createElement("div");
+        title.className = "recipe-title";
+        title.textContent = r.title;
+
+        const desc = document.createElement("div");
+        desc.textContent = r.description || "(No description)";
+
+        div.appendChild(title);
+        div.appendChild(desc);
+        container.appendChild(div);
+      });
+    }
+
+    document.getElementById("ingredientFilter")
+      .addEventListener("input", filterRecipes);
 
     loadRecipes();
   </script>
