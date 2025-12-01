@@ -1,123 +1,98 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <title>Recipeté – Recipes</title>
-  <link rel="stylesheet" href="main.css" />  <!-- Keep your CSS file -->
-  
-  <style>
-    /* Only include styling if main.css doesn't fully style UI */
-    body {
-      font-family: Arial, sans-serif;
-      background: #faeddc;
-      margin: 0;
-      padding: 20px;
-    }
-    h1 { color: #0f1a2a; }
-    #recipes { margin-top: 20px; }
+<meta charset="UTF-8" />
+<title>Recipeté</title>
 
-    .recipe-card {
-      background: #ede0f0;
-      padding: 12px 16px;
-      margin-bottom: 10px;
-      border-radius: 8px;
-    }
-    .recipe-title { font-weight: bold; margin-bottom: 4px; }
+<style>
+body { background:#faeddc;font-family:Arial;margin:0;padding:20px; }
+#recipes,.view { margin-top:15px; }
+.card{background:#ede0f0;padding:12px;border-radius:8px;margin-bottom:8px;cursor:pointer;}
 
-    /* 🔍 Search box styling */
-    #ingredientFilter {
-      width: 300px;
-      padding: 8px 10px;
-      margin-top: 10px;
-      border-radius: 8px;
-      border: 2px solid #c89deb;
-      background: #fff8ef;
-      font-size: 15px;
-    }
-    #ingredientFilter:focus {
-      border-color: #9e5add;
-      background: white;
-    }
-  </style>
+#ingredientFilter{padding:8px;border-radius:6px;width:250px;border:2px solid #c69ae9;}
+
+.panel{padding:10px;background:#ede0f0;border-radius:6px;display:none;}
+.tabs button{padding:9px 16px;border:none;background:#d6b5ff;margin-right:4px;cursor:pointer;border-radius:6px;}
+.tabs button.active{background:#b58af6;color:white;}
+</style>
 </head>
 
 <body>
-  <h1>Recipeté Recipes</h1>
-  <p>This page loads live data from <code>/api/recipes</code>.</p>
 
-  <!-- 🔍 Ingredient filter input -->
-  <input id="ingredientFilter" type="text" placeholder="Filter by ingredients (e.g. egg, sugar, flour)">
-  <small>Shows only recipes that contain all listed ingredients</small>
+<h1>Recipeté Recipes</h1>
+<input id="ingredientFilter" placeholder="Filter by ingredients...">
+<button id="searchBtn">Search</button>
 
-  <div id="recipes">Loading recipes...</div>
+<div id="recipes"></div>
 
-  <script>
-    let allRecipes = []; // store full list so we can filter locally
+<!-- RECIPE VIEW -->
+<div id="recipeView" style="display:none">
 
-    async function loadRecipes() {
-      try {
-        const resp = await fetch("/api/recipes");
-        if (!resp.ok) {
-          document.getElementById("recipes").textContent =
-            "Error loading recipes: " + resp.status;
-          return;
-        }
+  <h2 id="rTitle"></h2>
 
-        allRecipes = await resp.json();  // store original list
-        renderRecipes(allRecipes);
+  <div class="tabs">
+    <button class="tab active" onclick="showTab('ing')">Ingredients</button>
+    <button class="tab" onclick="showTab('inst')">Instructions</button>
+  </div>
 
-      } catch (e) {
-        document.getElementById("recipes").textContent = "Error: " + e;
-      }
-    }
+  <div id="ing" class="panel" style="display:block"></div>
+  <div id="inst" class="panel"></div>
 
-    /* 🔥 Filters recipes based on typed ingredients */
-    function filterRecipes() {
-      const query = document.getElementById("ingredientFilter").value
-        .toLowerCase().split(",").map(v => v.trim()).filter(v => v);
+</div>
 
-      if (query.length === 0) return renderRecipes(allRecipes);
+<script>
+let all=[];
 
-      const results = allRecipes.filter(r =>
-        query.every(ing =>
-          (r.ingredients || "").toLowerCase().includes(ing)
-        )
-      );
+async function loadRecipes(){
+  let r=await fetch("/api/recipes");
+  all=await r.json();
+  render(all);
+}
+function render(list){
+  const box=document.getElementById("recipes");
+  box.innerHTML="";
+  list.forEach(r=>{
+      let div=document.createElement("div");
+      div.className="card";
+      div.textContent=r.title;
+      div.onclick=()=>openRecipe(r.recipe_id);
+      box.appendChild(div);
+  });
+}
+async function openRecipe(id){
+  const r=await (await fetch("/api/recipes/"+id)).json();
 
-      renderRecipes(results);
-    }
+  document.getElementById("recipeView").style.display="block";
+  document.getElementById("rTitle").textContent=r.title;
 
-    /* 📌 Render visible results on screen */
-    function renderRecipes(list) {
-      const container = document.getElementById("recipes");
-      container.innerHTML = "";
+  document.getElementById("ing").innerHTML=
+    r.ingredients.length? r.ingredients.map(i=>`• ${i.ingredient_name} (${i.note||""})`).join("<br>")
+    : "No ingredients listed";
 
-      if (!list.length) {
-        container.textContent = "No matching recipes.";
-        return;
-      }
+  document.getElementById("inst").innerHTML=
+    r.description? r.description.replace(/\n+/g,"<br><br>")
+    : "No instructions available";
+}
 
-      list.forEach(r => {
-        const div = document.createElement("div");
-        div.className = "recipe-card";
+document.getElementById("searchBtn").onclick=()=>{
+  let q=document.getElementById("ingredientFilter").value.toLowerCase()
+      .split(",").map(x=>x.trim()).filter(x=>x);
 
-        const title = document.createElement("div");
-        title.className = "recipe-title";
-        title.textContent = r.title;
+  if(q.length==0) return render(all);
 
-        const desc = document.createElement("div");
-        desc.textContent = r.description || "(No description)";
+  render(all.filter(r=>
+    q.every(ing=> (r.description||"").toLowerCase().includes(ing))
+  ));
+};
 
-        div.appendChild(title);
-        div.appendChild(desc);
-        container.appendChild(div);
-      });
-    }
+function showTab(tab){
+  document.querySelectorAll(".panel").forEach(e=>e.style.display="none");
+  document.getElementById(tab).style.display="block";
+  document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
+  event.target.classList.add("active");
+}
 
-    document.getElementById("ingredientFilter")
-      .addEventListener("input", filterRecipes);
-
-    loadRecipes();
-  </script>
+loadRecipes();
+</script>
 </body>
 </html>

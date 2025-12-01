@@ -35,9 +35,11 @@ Accept: application/json
 ### ------------------------------
 ### Import Recipe from TheMealDB
 ### Example ID: 52772
+### New ID: 52795
 ### ------------------------------
-POST http://localhost:5001/api/external/themealdb/import/52772
+POST http://localhost:5001/api/external/themealdb/import/52795
 Accept: application/json
+
 
 
 

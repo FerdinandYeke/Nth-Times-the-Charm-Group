@@ -4,21 +4,17 @@ from db import get_db_connection
 
 app = Flask(__name__)
 
+# ==================================================================
+# IMPORT FROM THEMEALDB → stores into local DB
+# ==================================================================
 def import_meal_from_mealdb(id_meal: str) -> int:
-    """
-    Checks if recipe already exists in our DB, call TheMealDB, inserts into our DB
-    """
     conn = get_db_connection()
     cur = conn.cursor(dictionary=True)
 
-    #Check if recipe already imported
-    cur.execute(
-        """
+    cur.execute("""
         SELECT recipe_id FROM recipes
         WHERE source_type = 'THEMEALDB' and source_external_id = %s
-        """,
-        (id_meal,)
-    )
+    """, (id_meal,))
     row = cur.fetchone()
     if row:
         recipe_id = row["recipe_id"]
@@ -26,244 +22,109 @@ def import_meal_from_mealdb(id_meal: str) -> int:
         conn.close()
         return recipe_id
 
-    #Fetch from TheMealDB
-    url = f"https://www.themealdb.com/api/json/v1/1/lookup.php?i={id_meal}"
-    resp = requests.get(url, timeout=10)
+    # Fetch remote meal
+    resp = requests.get(f"https://www.themealdb.com/api/json/v1/1/lookup.php?i={id_meal}", timeout=10)
     resp.raise_for_status()
     data = resp.json()
-    meals = data.get("meals")
-    if not meals:
-        cur.close()
-        conn.close()
-        raise ValueError("Meal not found in TheMealDB")
-    
-    meal = meals[0]
 
-    #Cache raw JSON into external_recipe_cache
-    try:
-        cur.execute(
-            """
-            INSERT INTO external_recipe_cache (source_type, source_external_id, raw_jason)
-            VALUES ('THEMEALDB', %s, %s)
-            ON DUPLICATE KEY UPDATE raw_json = VALUES(raw_json), fetched_at = NOW()
-            """,
-            (id_meal, resp.text)
-        )
-    except Exception:
-        #If table doesn't exist yet, just skip caching
-        pass
+    meal = data.get("meals")[0]
 
-    #Insert into recipes
-    cur.execute(
-        """
+    # Insert recipe into DB
+    cur.execute("""
         INSERT INTO recipes
-            (user_id, title, description, total_time_min, servings, difficulty, is_public, source_type, source_external_id,
-            source_url, thumbnail_url, youtube_url)
-        VALUES
-            (NULL, %s, %s, NULL, NULL, 'EASY', 1, 'THEMEALDB', %s, %s, %s, %s)
-        """,
-            (
-                meal.get("strMeal"),
-                meal.get("strInstructions"),
-                meal.get("idMeal"),
-                meal.get("strSource"),
-                meal.get("strMealThumb"),
-                meal.get("strYoutube"),
-            )
-    )
+            (user_id, title, description, total_time_min, servings, difficulty, 
+             is_public, source_type, source_external_id, source_url, 
+             thumbnail_url, youtube_url)
+        VALUES (NULL, %s, %s, NULL, NULL,'EASY',1,'THEMEALDB',%s,%s,%s,%s)
+    """, (
+        meal.get("strMeal"),
+        meal.get("strInstructions"),  # THIS stores instructions text
+        meal.get("idMeal"),
+        meal.get("strSource"),
+        meal.get("strMealThumb"),
+        meal.get("strYoutube"),
+    ))
     recipe_id = cur.lastrowid
 
-    #Ingredients 1 through 20
-    for i in range (1, 21):
-        ing_name = (meal.get(f"strIngredient{i}") or "").strip()
-        measure = (meal.get(f"strMeasure{i}") or "").strip()
-        if not ing_name:
+    # store ingredients
+    for i in range(1, 21):
+        ing = meal.get(f"strIngredient{i}") or ""
+        measure = meal.get(f"strMeasure{i}") or ""
+        ing = ing.strip()
+        if not ing:
             continue
-
-        # look up ingredient, insert if not listed
-        cur.execute(
-            "SELECT ingredient_id FROM ingredients WHERE name = %s",
-            (ing_name,)
-        )
+        
+        cur.execute("SELECT ingredient_id FROM ingredients WHERE name=%s", (ing,))
         row = cur.fetchone()
-        if row:
-            ingredient_id = row["ingredient_id"]
-        else:
-            cur.execute(
-                "INSERT INTO ingredients (name, default_unit) VALUES (%s, NULL)",
-                (ing_name,)
-            )
+        ingredient_id = row["ingredient_id"] if row else None
+        
+        if not ingredient_id:
+            cur.execute("INSERT INTO ingredients (name) VALUES (%s)", (ing,))
             ingredient_id = cur.lastrowid
-
-        #Storing quanitity as 1 with actual measure in note, WILL NEED TO FIX
-        cur.execute(
-            """
-            INSERT INTO recipe_ingredients
-                (recipe_id, ingredient_id, quantity, unit, note)
-            VALUES
-                (%s, %s, %s, %s, %s)
-            """,
-            (recipe_id, ingredient_id, 1, None, measure or None)
-        )
+        
+        cur.execute("""
+            INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity, unit, note)
+            VALUES (%s,%s,1,NULL,%s)
+        """, (recipe_id, ingredient_id, measure))
 
     conn.commit()
     cur.close()
     conn.close()
     return recipe_id
 
-@app.route("/api/health")
-def health():
-    """
-    Simple health check endpoint.
-    Tries a small DB query to make sure MySQL is reachable.
-    """
-    db_status = "unknown"
 
-    try:
-        conn = get_db_connection()
-        cur = conn.cursor()
-        cur.execute("SELECT 1")
-        cur.fetchone()
-        cur.close()
-        conn.close()
-        db_status = "ok"
-    except Exception as e:
-        db_status = f"error: {e}"
-
-    return jsonify({
-        "status": "ok",
-        "database": db_status
-    })
-
+# ==================================================================
+# ROUTES
+# ==================================================================
 @app.route("/")
 def home():
     return render_template("index.html")
 
-@app.route("/api/recipes", methods=["GET"])
-def list_recipes():
-    """
-    Return a simple list of recipes with id, title, and basic info.
-    Powers main "recipe list" UI.
-    """
+
+@app.route("/api/recipes")
+def recipe_list():
     conn = get_db_connection()
-    # dictionary=True makes rows come back as dicts (for jsonify)
     cur = conn.cursor(dictionary=True)
-
-    cur.execute("""
-        SELECT
-          recipe_id,
-          title,
-          description,
-          total_time_min,
-          servings,
-          source_type
-        FROM recipes
-        ORDER BY created_at DESC
-    """)
-
+    cur.execute("SELECT recipe_id,title,description FROM recipes ORDER BY created_at DESC")
     rows = cur.fetchall()
     cur.close()
     conn.close()
-
     return jsonify(rows)
 
-@app.route("/api/recipes/<int:recipe_id>", methods=["GET"])
+
+@app.route("/api/recipes/<int:recipe_id>")
 def get_recipe(recipe_id):
     conn = get_db_connection()
     cur = conn.cursor(dictionary=True)
 
-    # ==========================
-    # Fetch the recipe itself
-    # ==========================
-    cur.execute("""
-        SELECT
-            recipe_id,
-            user_id,
-            title,
-            description,
-            total_time_min,
-            servings,
-            difficulty,
-            source_type,
-            source_external_id
-        FROM recipes
-        WHERE recipe_id = %s
-    """, (recipe_id,))
-    
+    cur.execute("""SELECT recipe_id,title,description FROM recipes WHERE recipe_id=%s""",(recipe_id,))
     recipe = cur.fetchone()
 
     if not recipe:
-        conn.close()
-        return jsonify({"error": "Recipe not found"}), 404
+        return jsonify({"error":"Recipe not found"}),404
 
-    # ==========================================
-    # Fetch ingredients linked to the recipe
-    # ==========================================
     cur.execute("""
-        SELECT
-            ri.ingredient_id,
-            i.name AS ingredient_name,
-            ri.quantity,
-            ri.unit,
-            ri.note
+        SELECT i.name AS ingredient_name, ri.note
         FROM recipe_ingredients ri
         JOIN ingredients i ON ri.ingredient_id = i.ingredient_id
-        WHERE ri.recipe_id = %s
-    """, (recipe_id,))
-
+        WHERE ri.recipe_id=%s
+    """,(recipe_id,))
     ingredients = cur.fetchall()
-
-    # ==========================
-    # Fetch recipe steps
-    # ==========================
-    try:
-        cur.execute("""
-            SELECT
-                step_number,
-                instruction
-            FROM recipe_steps
-            WHERE recipe_id = %s
-            ORDER BY step_number ASC
-        """, (recipe_id,))
-
-        steps = cur.fetchall()
-
-    except Exception:
-        # If your DB doesn't yet have recipe_steps, steps can be optional
-        steps = []
 
     cur.close()
     conn.close()
 
-    # ==========================
-    # Build the response JSON
-    # ==========================
     recipe["ingredients"] = ingredients
-    recipe["steps"] = steps
-
     return jsonify(recipe)
 
-@app.route("/api/external/themealdb/import/<id_meal>", methods=["POST"])
-def import_themealdb_recipe(id_meal):
-    """
-    Import a recipe from TheMealDB by idMeal and store it in the local DB.
-    Returns the local recipe_id.
-    """
+
+@app.route("/api/external/themealdb/import/<id_meal>",methods=["POST"])
+def import_external(id_meal):
     try:
-        recipe_id = import_meal_from_mealdb(id_meal)
-        return jsonify({
-            "recipe_id": recipe_id,
-            "source_type": "THEMEALDB",
-            "source_external_id": id_meal
-        }), 201
-    except ValueError as ve:
-        # e.g., meal not found
-        return jsonify({"error": str(ve)}), 404
+        return jsonify({"recipe_id":import_meal_from_mealdb(id_meal)})
     except Exception as e:
-        # generic error
-        return jsonify({"error": str(e)}), 500
+        return jsonify({"error":str(e)}),500
 
 
-if __name__ == "__main__":
-    # For local debugging (not used inside Docker, but handy if you run python app.py directly)
-    app.run(host="0.0.0.0", port=5000, debug=True)
+if __name__=="__main__":
+    app.run(host="0.0.0.0",port=5000,debug=True)
