@@ -15,3 +15,7 @@ From the `App/` directory:
 
 docker compose build
 docker compose up
+
+### Run Only Unit Test in Docker
+
+docker compose run --rm tests
