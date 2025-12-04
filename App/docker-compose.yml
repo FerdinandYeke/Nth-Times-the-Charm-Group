@@ -1,46 +1,45 @@
-# version: "3.9"
-
 services:
+  app:
+    build:
+      context: .          # App directory, where Dockerfile & requirements.txt live
+      dockerfile: Dockerfile
+    working_dir: /app
+    volumes:
+      - ./app:/app        # optional, if you want live code reloads
+    ports:
+      - "5001:5000"
+    environment:
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_NAME: recipete_db
+      DB_USER: recipete
+      DB_PASSWORD: recipete_pw
+    depends_on:
+      - db
+
+  tests:
+    build:
+      context: .          # same as above
+      dockerfile: Dockerfile
+    working_dir: /app
+    command: ["pytest", "-v"]
+    environment:
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_NAME: recipete_db
+      DB_USER: recipete
+      DB_PASSWORD: recipete_pw
+    depends_on:
+      - db
+
   db:
     image: mysql:8.0
-    container_name: recipete-db
     environment:
       MYSQL_ROOT_PASSWORD: rootpw
       MYSQL_DATABASE: recipete_db
       MYSQL_USER: recipete
       MYSQL_PASSWORD: recipete_pw
+    volumes:
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
       - "3306:3306"
-    volumes:
-      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
-      - db_data:/var/lib/mysql
-  app:
-    build:
-      context: ./app
-      dockerfile: Dockerfile
-    container_name: recipete-app
-    depends_on:
-      - db
-    environment:
-      FLASK_ENV: development
-      DB_HOST: db
-      DB_PORT: 3306
-      DB_NAME: recipete_db
-      DB_USER: recipete
-      DB_PASSWORD: recipete_pw
-    ports:
-      - "5001:5000"
-  tests:
-    build: .
-    depends_on:
-      - db
-    environment:
-      DB_HOST: db
-      DB_PORT: 3306
-      DB_NAME: recipete_db
-      DB_USER: recipete
-      DB_PASSWORD: recipete_pw
-    command: ["pytest", "-v"]
-
-volumes:
-  db_data:
