@@ -125,6 +125,27 @@ def import_external(id_meal):
     except Exception as e:
         return jsonify({"error":str(e)}),500
 
+@app.route("/api/health")
+def health():
+    """
+    Simple health check to verify the API and DB are reachable.
+    """
+    db_status = "ok"
+    try:
+        conn = get_db_connection()
+        cur = conn.cursor()
+        cur.execute("SELECT 1")
+        cur.fetchone()
+        cur.close()
+        conn.close()
+    except Exception as e:
+        db_status = f"error: {e}"
+
+    return jsonify({
+        "status": "ok",
+        "database": db_status
+    })
+
 
 if __name__=="__main__":
     app.run(host="0.0.0.0",port=5000,debug=True)
