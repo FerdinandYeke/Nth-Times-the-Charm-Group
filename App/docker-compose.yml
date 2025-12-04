@@ -5,7 +5,7 @@ services:
       dockerfile: Dockerfile
     working_dir: /app
     volumes:
-      - ./app:/app        # optional, if you want live code reloads
+      - ./app:/app        # optional: live reload while developing
     ports:
       - "5001:5000"
     environment:
@@ -19,7 +19,7 @@ services:
 
   tests:
     build:
-      context: .          # same as above
+      context: .          # use the same Dockerfile & code as the app
       dockerfile: Dockerfile
     working_dir: /app
     command: ["pytest", "-v"]
