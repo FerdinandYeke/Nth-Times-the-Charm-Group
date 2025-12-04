@@ -30,6 +30,17 @@ services:
       DB_PASSWORD: recipete_pw
     ports:
       - "5001:5000"
+  tests:
+    build: .
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_NAME: recipete_db
+      DB_USER: recipete
+      DB_PASSWORD: recipete_pw
+    command: ["pytest", "-v"]
 
 volumes:
   db_data:
